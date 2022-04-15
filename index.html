@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAC Contributor</title>
+</head>
+<style>
+    .section{
+        display: none;
+    }
+</style>
+<body>
+    <h1>Contributor</h1>
+
+    <div>
+        <div>Exam Type</div>
+        <select onchange="chageSection(this.value)" name="" id="">
+            <option value="cq">CQ</option>
+            <option value="sq">Short Question</option>
+            <option value="bq">Brode Qusetion</option>
+            <option value="mcq">MCQ - Simple</option>
+            <!-- <option value="mcq-2">MCQ - Passege</option>
+            <option value="mcq-3">MCQ - Multiple</option> -->
+        </select>
+
+        <div id="cq" class="section">
+            <div>CQ Passege</div>
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+        </div>
+
+        <div id="sq" class="section">
+            <div>Short Question</div>
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+        </div>
+
+        <div id="bq" class="section">
+            <div>Brode Question</div>
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+        </div>
+
+        <div id="mcq" class="section">
+            <div>Question</div>
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <div>Option - A</div>
+            <input type="text">
+            <div>Option - B</div>
+            <input type="text">
+            <div>Option - C</div>
+            <input type="text">
+            <div>Option - D</div>
+            <input type="text">
+        </div>
+    </div>
+
+    <script>
+        let opened = "cq";
+        document.getElementById(opened).style.display = "block";
+
+        function chageSection(value){
+            document.getElementById(opened).style.display = "none";
+            document.getElementById(value).style.display = "block";
+            opened = value;
+        }
+    </script>
+</body>
+</html>
