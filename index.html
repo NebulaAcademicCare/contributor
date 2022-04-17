@@ -4,64 +4,281 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <title>NAC Contributor</title>
+
 </head>
 <style>
+
+    .page-header{
+        background-color: rgb(110, 187, 253);
+        padding: 10px;
+        /* margin-top: 10px; */
+        border-bottom: 1px solid #ccc;
+        /* border-radius: 10px; */
+        text-align: center;
+        margin-left: -20px;
+        margin-right: -20px;
+        color: white;
+    }
+    .form{
+        margin: 20px 0;
+        border: 1px solid #ccc;
+        padding: 25px;
+        border-radius: 10px;
+    }
     .section{
         display: none;
     }
+
+    .title{
+        font-weight: 700;
+        border: 1px solid #ccc;
+        border-left: 5px solid #ccc;
+        padding: 0 5px;
+        width: 150px;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
 </style>
 <body>
-    <h1>Contributor</h1>
+    <div class="container-fluid">
+        <div class="page-header">
+            <h2>Contributor</h2>
+        </div>
+        <form class="form">
+            <div class="form-group">
+                <label for="classList">Class</label>
+                <select onchange="selectClass(this.value)" class="form-control" id="classList">
+                  <option value=""></option>
+                  <option value="6">Six</option>
+                  <option value="7">Seven</option>
+                  <option value="8">Eight</option>
+                  <option value="9g">Nine-G</option>
+                  <option value="9s">Nine-S</option>
+                  <option value="10g">Ten-G</option>
+                  <option value="10s">Ten-S</option>
+                </select>
+            </div>
+            <div id="subjects" class="form-group section">
+                <label for="subject">Subject</label>
+                <select onchange="selectSubject(this.value)" class="form-control" id="subject">
+                  
+                </select>
+            </div>
+            <div id="lectures" class="form-group section">
+                <label for="lecture">Lecture</label>
+                <select onchange="getLecture(this)" class="form-control" id="lecture">
+                  
+                </select>
+            </div>
+        </form>
 
-    <div>
-        <div>Exam Type</div>
-        <select onchange="chageSection(this.value)" name="" id="">
-            <option value="cq">CQ</option>
-            <option value="sq">Short Question</option>
-            <option value="bq">Brode Qusetion</option>
-            <option value="mcq">MCQ - Simple</option>
-            <!-- <option value="mcq-2">MCQ - Passege</option>
-            <option value="mcq-3">MCQ - Multiple</option> -->
-        </select>
+        <div id="lectureInfo" class="form section">
+            <h4 class="text-center">Lecture : <span id="lectureId"></span></h4>
+            <div class="title">Title</div>
+            <div id="title"></div>
 
-        <div id="cq" class="section">
-            <div>CQ Passege</div>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <div class="title">Topics</div>
+            <div id="topics"></div>
         </div>
 
-        <div id="sq" class="section">
-            <div>Short Question</div>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-        </div>
+        <form id="qType" class="form section">
+            <div class="form-group">
+                <label for="classList">Question Type</label>
+                <select onchange="qTypeSelect(this, this.value)" class="form-control" id="">
+                  <option value=""></option>
+                  <option value="cq">CQ</option>
+                  <option value="sq">Short Question</option>
+                  <option value="dq">Descriptive question</option>
+                  <option value="mcq">MCQ</option>
+                  <!-- <option value="mcq-p">MCQ-Passage</option> -->
+                  <option value="mcq-m">MCQ-Multiple</option>
+                </select>
+            </div>
 
-        <div id="bq" class="section">
-            <div>Brode Question</div>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-        </div>
+            <div id="passegeDiv" class="form-group section">
+                <label for="passege"><span id="pq-span"></span></label>
+                <textarea class="form-control" id="passege" rows="3"></textarea>
+            </div>
 
-        <div id="mcq" class="section">
-            <div>Question</div>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-            <div>Option - A</div>
-            <input type="text">
-            <div>Option - B</div>
-            <input type="text">
-            <div>Option - C</div>
-            <input type="text">
-            <div>Option - D</div>
-            <input type="text">
-        </div>
+            <div id="mul-i-div" class="form-group section">
+                <label for="mul-i">Multiple i</label>
+                <input class="form-control" id="mul-i">
+            </div>
+
+            <div id="mul-ii-div" class="form-group section">
+                <label for="mul-ii">Multiple ii</label>
+                <input class="form-control" id="mul-ii">
+            </div>
+
+            <div id="mul-iii-div" class="form-group section">
+                <label for="mul-iii">Multiple iii</label>
+                <input class="form-control" id="mul-iii">
+            </div>
+
+            <div id="qo-a-div" class="form-group section">
+                <label for="qo-a"><span class="qo"></span> A</label>
+                <input class="form-control" id="qo-a">
+            </div>
+
+            <div id="qo-b-div" class="form-group section">
+                <label for="qo-b"><span class="qo"></span> B</label>
+                <input class="form-control" id="qo-b">
+            </div>
+
+            <div id="qo-c-div" class="form-group section">
+                <label for="qo-c"><span class="qo"></span> C</label>
+                <input class="form-control" id="qo-c">
+            </div>
+
+            <div id="qo-d-div" class="form-group section">
+                <label for="qo-d"><span class="qo"></span> D</label>
+                <input class="form-control" id="qo-d">
+            </div>
+
+            <div style="text-align: right;">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <input type="reset" style="display: none;" id="qFormResetBtn">
+        </form>
+        
     </div>
 
     <script>
-        let opened = "cq";
-        document.getElementById(opened).style.display = "block";
+        let div = ["subjects", "lectures", "lectureInfo", "qType", "passegeDiv", "mul-i-div", "mul-ii-div", "mul-iii-div", "qo-a-div", "qo-b-div", "qo-c-div", "qo-d-div"];
 
-        function chageSection(value){
-            document.getElementById(opened).style.display = "none";
-            document.getElementById(value).style.display = "block";
-            opened = value;
+        function selectClass(value){
+            let range = 0;
+            document.getElementById("qFormResetBtn").click();
+            div.forEach((element, index) => {
+                    if(index >= range) document.getElementById(element).style.display = "none";
+            });
+            let element = div[range];
+            if(value){
+                document.getElementById(element).style.display = "block";
+
+               if(Number(value) <= 8 && Number(value) != NaN){
+                   document.getElementById("subject").innerHTML = `
+                        <option value=""></option>
+                        <option value="en">English</option>
+                        <option value="mat">Mathematics</option>
+                        <option value="sci">Science</option>
+                    `;
+               }
+               else if(value.indexOf("g") != -1){
+                    document.getElementById("subject").innerHTML = `
+                        <option value=""></option>
+                        <option value="bn">Bangla</option>
+                        <option value="en">English</option>
+                        <option value="mat">Mathematics</option>
+                   `;
+               }
+               else{
+                    document.getElementById("subject").innerHTML = `
+                        <option value=""></option>
+                        <option value="phy">Physics</option>
+                        <option value="che">Chemistry</option>
+                        <option value="hm">Higher Mathematics</option>
+                        <option value="bio">Biology</option>
+                   `;
+               }
+            }
+        }
+
+        function selectSubject(value){
+            let range = 1;
+            document.getElementById("qFormResetBtn").click();
+            div.forEach((element, index) => {
+                    if(index >= range) document.getElementById(element).style.display = "none";
+            });
+            let element = div[range];
+            if(value && document.getElementById("classList").value == "10s" && document.getElementById("subject").value == "hm"){
+                let sheetId = "1Q-g1g2EMBf77irHoE5x1PkUzKZqpOggsZDuCVsrZaUg";
+                let sheetName = document.getElementById("classList").value + "-" + document.getElementById("subject").value;
+                let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
+                fetch(url).then(res => res.text()).then(response => {
+                    let lectures = JSON.parse(String(response).substr(47).slice(0, -2)).table.rows;
+                    document.getElementById("lecture").innerHTML = "<option></option>";
+                    for(let i = 1; i < lectures.length; i++){
+                        let option = document.createElement("option");
+                        option.innerHTML = lectures[i].c[0].v;
+                        option.value = i;
+                        option.setAttribute("topics", lectures[i].c[3].v);
+                        option.setAttribute("title", lectures[i].c[1].v);
+                        document.getElementById("lecture").appendChild(option);
+                    }
+                    console.log(lectures)
+                    document.getElementById(element).style.display = "block";
+                }).catch(err => console.log(err));
+            }
+        }
+
+        function getLecture(select){
+            let range = 2;
+            document.getElementById("qFormResetBtn").click();
+            div.forEach((element, index) => {
+                    if(index >= range) document.getElementById(element).style.display = "none";
+            });
+            let element = div[range];
+            let element2 = div[range + 1];
+            if(select.value){
+                document.getElementById(element).style.display = "block";
+                document.getElementById(element2).style.display = "block";
+                let option = select.childNodes[select.value];
+
+                document.getElementById("lectureId").innerHTML = option.innerHTML;
+                document.getElementById("title").innerHTML = option.getAttribute("title");
+                document.getElementById("topics").innerHTML = "<li>" + option.getAttribute("topics").replace(/\n/g, "</li><li>") + "</li>";
+            }
+        }
+
+        function qTypeSelect(select, value){
+            let range = 4;
+            document.getElementById("qFormResetBtn").click();
+            select.value = value;
+            div.forEach((element, index) => {
+                    if(index >= range) document.getElementById(element).style.display = "none";
+            });
+
+            let element = div[range];
+            if(value){
+                document.getElementById(element).style.display = "block";
+                if(value == "cq"){
+                    document.getElementById("pq-span").innerHTML = "Passege";
+                }
+                else document.getElementById("pq-span").innerHTML = "Question";
+
+                if(value == "cq"){
+                    let num = (document.getElementById("subject").value != "hm") ? 4 : 3;
+
+                    let alfabet = ["a", "b", "c", "d"];
+
+                    for(let i = 0; i < num; i++){
+                        document.getElementsByClassName("qo")[i].innerHTML = "Question";
+                        document.getElementById(`qo-${alfabet[i]}-div`).style.display = "block";
+                    }
+                }
+
+                if(value.indexOf("mcq") >= 0){
+                    let alfabet = ["a", "b", "c", "d"];
+
+                    for(let i = 0; i < 4; i++){
+                        document.getElementsByClassName("qo")[i].innerHTML = "Option";
+                        document.getElementById(`qo-${alfabet[i]}-div`).style.display = "block";
+                    }
+                }
+
+                if(value == "mcq-m"){
+                    let mul = ["i", "ii", "iii"];
+                    for(let i = 0; i < 3; i++){
+                        document.getElementById(`mul-${mul[i]}-div`).style.display = "block";
+                    }
+                }
+            }
         }
     </script>
 </body>
