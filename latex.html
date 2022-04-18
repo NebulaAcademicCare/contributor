@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX Live</title>
+</head>
+<body>
+    <form enctype="multipart/form-data" 
+    action="https://texlive.net/cgi-bin/latexcgi" method="post" target="_blank">
+
+    <textarea name="filecontents[]" style="width: 100%; height: 500px;">
+        \documentclass{article}
+        \usepackage{fontspec}
+        \setmainfont{Times New Roman}
+        \newfontface{\bn}{Kalpurush}
+        
+        \title{Bangla Writing in Latex}
+        \author{imrajon0@gmail.com}
+        \date{26 July, 2019}
+        
+        
+        \begin{document}
+        \maketitle
+        \section*{Club Football}
+        \bn{অনেক আশা করে লিভারপুল ছেড়ে বার্সেলোনায় যোগ দিয়েছিলেন ব্রাজিল তারকা ফিলিপ কুতিনহো। দেড় বছর পর এখন সেই কুতিনহোই বার্সার মূল একাদশে জায়গা পান না। কুতিনহোকে বিক্রি করে দেওয়ার সর্বাত্মক চেষ্টা চালিয়ে যাচ্ছে বার্সেলোনা। কুতিনহোর পরবর্তী ক্লাব হিসেবে উচ্চারিত হচ্ছে লিভারপুলের নামও। }
+        \end{document}
+    </textarea>
+    <select style="width: 100%;" name="engine">
+        <option value="lualatex">lualatex</option>
+        <option value="pdflatex">pdflatex</option>
+        <option value="xelatex">xelatex</option>
+        <option value="uplatex">uplatex</option>
+        <option value="platex">platex</option>
+        <option value="latex">latex</option>
+        <option value="lualatex-dev">lualatex-dev</option>
+        <option value="pdflatex-dev">pdflatex-dev</option>
+        <option value="xelatex-dev">xelatex-dev</option>
+        <option value="uplatex-dev">uplatex-dev</option>
+        <option value="platex-dev">platex-dev</option>
+        <option value="latex-dev">latex-dev</option>
+        <option value="luatex">luatex</option>
+        <option value="pdftex">pdftex</option>
+        <option value="xetex">xetex</option>
+        <option value="uptex">uptex</option>
+        <option value="ptex">ptex</option>
+        <option value="tex">tex</option>
+        <option value="context">context</option>
+    </select>
+    <select style="width: 100%;" name="return">
+        <option value="pdfjs">pdfjs</option>
+        <option value="pdf">pdf</option>
+        <option value="log">log</option>
+        <option value="make4ht">make4ht</option>
+        <option value="make4ht-l">make4ht-l</option>
+        <option value="latexml">LaTeXML</option>
+        <option value="lwarp">lwarp</option>
+    </select>
+    <input type="hidden" value="document.tex" name="filename[]">
+    <button type="submit">Submit</button>
+    <script>
+        function submitLatex(){
+            const formData = new FormData();
+            formData.append('filecontents[]', document.getElementById("latex").value);
+            formData.append('filename[]', 'document.tex');
+            formData.append('engine', document.getElementById("engine").value);
+            formData.append('return', document.getElementById("return").value);
+
+            fetch('https://texlive.net/cgi-bin/latexcgi', {
+                method: 'POST',
+                body: formData,
+                // If you add this, upload won't work
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            })
+            .then(response => response.text())
+            .then(result => {
+            console.log('Success:', result);
+            })
+            .catch(error => {
+            console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
