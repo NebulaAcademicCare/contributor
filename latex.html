@@ -10,9 +10,9 @@
     <form enctype="multipart/form-data" 
     action="https://texlive.net/cgi-bin/latexcgi" method="post" target="_blank">
 
-    <textarea name="filecontents[]" style="width: 100%; height: 500px;">
-        \documentclass{article}
+    <textarea name="filecontents[]" style="width: 100%; height: 500px;">\documentclass[5pt,a5paper,english]{article}
         \usepackage{fontspec}
+        \usepackage{geometry}
         \setmainfont{Times New Roman}
         \newfontface{\bn}{Kalpurush}
         
@@ -25,8 +25,7 @@
         \maketitle
         \section*{Club Football}
         \bn{অনেক আশা করে লিভারপুল ছেড়ে বার্সেলোনায় যোগ দিয়েছিলেন ব্রাজিল তারকা ফিলিপ কুতিনহো। দেড় বছর পর এখন সেই কুতিনহোই বার্সার মূল একাদশে জায়গা পান না। কুতিনহোকে বিক্রি করে দেওয়ার সর্বাত্মক চেষ্টা চালিয়ে যাচ্ছে বার্সেলোনা। কুতিনহোর পরবর্তী ক্লাব হিসেবে উচ্চারিত হচ্ছে লিভারপুলের নামও। }
-        \end{document}
-    </textarea>
+        \end{document}</textarea>
     <select style="width: 100%;" name="engine">
         <option value="lualatex">lualatex</option>
         <option value="pdflatex">pdflatex</option>
